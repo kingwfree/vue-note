@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a id="bind" v-bind:[attributeName]="url">url</a>
+<a id="on" v-on:[eventName]="doSomething">doSomething</a>
+<button id="bt" v-bind:disabled="flag">Button</button>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    //flag为true时无法点击
+    /*
+    * 如果 flag 的值是 null、undefined 或 false，
+    * 则 disabled 特性甚至不会被包含在渲染出来的 <button> 元素中。
+    * */
+    new Vue({
+        el:'#bt',
+        data:{
+            flag:false
+        }
+    });
+
+    /*
+    * 使用 JavaScript 表达式
+    * 每个绑定都只能包含单个表达式
+    *
+    * <!-- 这是语句，不是表达式 -->
+      {{ var a = 1 }}
+
+      <!-- 流控制也不会生效，请使用三元表达式 -->
+      {{ if (ok) { return message } }}
+    *
+    *
+    * {{ number + 1 }}
+
+      {{ ok ? 'YES' : 'NO' }}
+
+      {{ message.split('').reverse().join('') }}
+
+      <div v-bind:id="'list-' + id"></div>
+    *
+    *
+    *
+    * */
+
+    /*
+    * 模板表达式都被放在沙盒中，
+    * 只能访问全局变量的一个白名单，如 Math 和 Date 。
+    * 你不应该在模板表达式中试图访问用户定义的全局变量。
+    * */
+
+    //动态参数
+
+    /*
+    *对动态参数表达式的约束
+    * 动态参数表达式有一些语法约束，
+    * 因为某些字符，例如空格和引号，放在 HTML 特性名里是无效的。
+    * 同样，在 DOM 中使用模板时你需要回避大写键名。
+    *
+    * */
+
+
+    /*
+    *
+    * 指令特性的值预期是单个 JavaScript 表达式 (v-for 是例外情况
+    * <p v-if="seen">现在你看到我了</p>
+      这里，v-if 指令将根据表达式 seen 的值的真假来插入/移除 <p> 元素。
+    *
+    * 从 2.6.0 开始，可以用方括号括起来的 JavaScript 表达式作为一个指令的参数：
+      <a v-bind:[attributeName]="url"></a>
+    * 当 attributeName 的值为 "href" 时，v-bind:[attributeName] 将等价于 v-bind:href
+    *
+    * <a v-on:[eventName]="doSomething"></a>
+    * 当 eventName 的值为 "focus" 时，v-on:[eventName] 将等价于 v-on:focus
+    * */
+    new Vue({
+        el:'#bind',
+        data:{
+            attributeName:"href",
+            url:'https://www.baidu.com'
+        }
+    });
+    new Vue({
+        el:'#on',
+        data:{
+            eventName:"focus",
+            doSomething:function () {
+                alert(1)
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>
