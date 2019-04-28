@@ -2,14 +2,17 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
       home
+      <PageA />
   </div>
 </template>
 
 <script>
+    import PageA from "./components/a";
 
-export default {
-  name: 'app'
-}
+    export default {
+        name: 'app',
+        components:{PageA}
+    }
 </script>
 
 <style>
